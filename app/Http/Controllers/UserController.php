@@ -32,7 +32,7 @@ class UserController extends Controller
         }
 
         return response()->json(
-            $user->createToken('MyApp')->plainTextToken , 
+            $user->createToken('MyApp')->plainTextToken, 
             200
         );
     }
