@@ -4,10 +4,10 @@ import 'bootstrap';
 
 import ReactDOM from "react-dom/client";
 import Home from "./Pages/Home";
-import About from "./Pages/Guest/About";
 import Layout from "./Pages/Guest/Layout";
 import P404 from "./Pages/P404";
-
+import Login from "./Pages/Guest/Login";
+import Logout from "./Logout";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
          
 export default function App() {
@@ -16,11 +16,9 @@ export default function App() {
       <Routes>
         <Route path="/" element={<Layout />}>
           <Route index element={<Home />} />
-          <Route path="about" element={<About />} />
+          <Route path="login" element={<Login />} />
+          <Route path="logout" element={<Logout />} />
           <Route path="*" element={<P404 />} />
-          {/* <Route path="blogs" element={<Blogs />} />
-          <Route path="contact" element={<Contact />} />
-          <Route path="*" element={<NoPage />} /> */}
         </Route>
       </Routes>
     </BrowserRouter>
