@@ -59,7 +59,7 @@ class UserController extends Controller
                 200
             );
         }
-        return response()->json(['message' => 'Unauthorized'], 401);
+        return response()->json(['message' => 'E-mail or password is incorrect'], 401);
     }
 
     /**
