@@ -1,0 +1,13 @@
+{
+    "Home": "Anasayfa",
+    "Login": "Giriş",
+    "Register": "Kayıt",
+    "Search": "Ara",
+    "Profile": "Profil",
+    "Settings": "Ayarlar",      
+    "Sign out": "Çıkış",
+    "Dashboard": "Panel",
+    "Categories": "Kategoriler",
+    "Create Category": "Kategori Oluştur",
+    "Invalid email or password": "Geçersiz e-posta veya şifre"
+}
