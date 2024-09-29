@@ -5,6 +5,7 @@ use Illuminate\Foundation\Configuration\Exceptions;
 use Illuminate\Foundation\Configuration\Middleware;
 
 return Application::configure(basePath: dirname(__DIR__))
+
     ->withRouting(
         web: __DIR__.'/../routes/web.php',
         api: __DIR__.'/../routes/api.php',
@@ -13,7 +14,7 @@ return Application::configure(basePath: dirname(__DIR__))
     )
     ->withMiddleware(
         function (Middleware $m) {
-            $m->append(\App\Http\Middleware\SetLocale::class);
+            $m->web(append: \App\Http\Middleware\SetLocale::class);
         }
     )
     ->withExceptions(

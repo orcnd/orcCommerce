@@ -1,9 +1,15 @@
 {
-    "Home": "الصفحة الرئيسية",
+    "Home": "الرئيسية",
     "Login": "تسجيل الدخول",
+    "Email": "البريد الإلكتروني",
+    "Password": "كلمة المرور",
     "Register": "تسجيل",
     "Search": "بحث",
     "Profile": "الملف الشخصي",
     "Settings": "الإعدادات",      
-    "Sign out": "تسجيل الخروج"
+    "Sign out": "تسجيل الخروج",
+    "Dashboard": "لوحة التحكم",
+    "Categories": "الفئات",
+    "Create Category": "إنشاء فئة",
+    "Invalid email or password": "البريد الإلكتروني أو كلمة المرور غير صحيحة"
 }

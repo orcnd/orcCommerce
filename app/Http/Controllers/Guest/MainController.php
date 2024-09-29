@@ -27,7 +27,7 @@ class MainController extends Controller
             }
             return redirect()->back()->withErrors(
                 [
-                'email' => 'Invalid email or password'
+                'email' => __('Invalid email or password')
                 ]
             )->withInput();
         
