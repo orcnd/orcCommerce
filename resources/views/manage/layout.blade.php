@@ -12,24 +12,23 @@
         integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
 </head>
 <body>
-    <header class="p-3 mb-3 border-bottom">
-        <div class="container">
-            <div class="d-flex flex-wrap align-items-center justify-content-center justify-content-lg-start">
-                <ul class="nav col-12 col-lg-auto me-lg-auto mb-2 justify-content-center mb-md-0">
-                    <li><a href="{{route('manage.home')}}" class="nav-link px-2 link-secondary">{{__('Home')}}</a></li>                   
-                </ul>
+    <div class="container-fluid">
+        <div class="row flex-nowrap">
+            <div class="col-auto col-md-3 col-xl-2 px-sm-2 px-0">
+                <div class="d-flex flex-column align-items-center align-items-sm-start px-3 pt-2 min-vh-100">
+                    <ul class="nav nav-pills flex-column mb-auto">
+                        <li class="nav-item"><a href="{{route('manage.home')}}" class="nav-link px-2 link-secondary">{{__('Home')}}</a></li>                   
+                        <li class="nav-item"><a href="{{route('manage.category.index')}}" class="nav-link px-2 link-secondary">{{__('Categories')}}</a></li>                   
+                    </ul>
 
-                <form class="col-12 col-lg-auto mb-3 mb-lg-0 me-lg-3" role="search">
-                    <input type="search" class="form-control" placeholder="{{__('Search')}}..." aria-label="{{__('Search')}}">
-                </form>
-                @include('shared.mainNavbarLanguageMenu')
-                @include('shared.mainNavbarUserMenu')
+                    @include('shared.mainNavbarLanguageMenu')
+                    @include('shared.mainNavbarUserMenu')
+                </div>
+            </div>
+            <div class="col py-3">
+                @yield('content')
             </div>
         </div>
-    </header>
-
-    <div class="container">
-        @yield('content')
     </div>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"
         integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous">
