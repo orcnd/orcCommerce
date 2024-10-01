@@ -13,20 +13,39 @@ class CategoryController extends Controller
         $this->_model=\App\Models\Category::class;
         $this->_viewBase='manage.category.';
         $this->_routeBase='manage.category.';
-        $this->_createValidate=[
-            'name' => 'required|string|max:255',
-            'slug' => 'required|string|max:255|unique:categories,slug',
-            'description' => 'required|string|max:255', 
-            'parent_id' => 'nullable|numeric',
-        ];
-        $this->_updateValidate=[   
-            'name' => 'required|string|max:255',
-            'slug' => 'required|string|max:255|unique:categories,slug',
-            'description' => 'required|string|max:255', 
-            'parent_id' => 'nullable|numeric',
-        ];
-
     }
+    /**
+     * Gives validation array for create action 
+     * 
+     * @return array
+     */
+    private function _getCreateValidateArray():array 
+    {
+        return [
+            'name' => 'required|string|max:255',
+            'slug' => 'required|string|max:255|unique:categories,slug',
+            'description' => 'required|string|max:255', 
+            'parent_id' => 'nullable|numeric',
+        ];
+    }
+
+    /**
+     * Gives update validation array 
+     * 
+     * @param mixed $object object 
+     * 
+     * @return array
+     */
+    private function _getUpdateValidateArray($object):array 
+    {
+        return [   
+            'name' => 'required|string|max:255',
+            'slug' => 'required|string|max:255|unique:categories,slug,' . $object->id,
+            'description' => 'required|string|max:255', 
+            'parent_id' => 'nullable|numeric',
+        ];
+    }
+
     /**
      * Index
      * 
@@ -68,7 +87,7 @@ class CategoryController extends Controller
      */
     function store(Request $request)
     {
-        $request->validate($this->_createValidate);
+        $request->validate($this->_getCreateValidateArray());
         $item= $this->_model::create(attributes: $request->all());
         return redirect(
             route($this->_viewBase . 'show', [$item])
@@ -124,7 +143,7 @@ class CategoryController extends Controller
     function update(Request $request, int $id)
     {
         $object=$this->_model::findOrFail($id);
-        $request->validate($this->_updateValidate);
+        $request->validate($this->_getUpdateValidateArray($object));
         $object->update($request->all());
         return redirect(
             route($this->_viewBase . 'show', [$object])
