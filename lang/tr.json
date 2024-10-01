@@ -11,5 +11,19 @@
     "Dashboard": "Panel",
     "Categories": "Kategoriler",
     "Create Category": "Kategori Oluştur",
-    "Invalid email or password": "Geçersiz e-posta veya şifre"
+    "Invalid email or password": "Geçersiz e-posta veya şifre",
+    "Name": "İsim",
+    "Slug": "Slug",
+    "Description": "Açıklama",
+    "Parent": "Üst",
+    "Parent Category": "Üst Kategori",
+    "Top Level": "Üst Düzey",
+    "Create": "Oluştur",
+    "Delete": "Sil",
+    "Edit": "Düzenle",
+    "Update": "Güncelle",
+    "Deleted successfully": "Başarıyla silindi",    
+    "Are you sure want to delete this ?" : "Bu silmek istediğinize emin misiniz ?",
+    
+    "Something went wrong please contact with an admin": "Bir şeyler ters gitti, lütfen bir yönetici ile iletişime geçin"
 }
