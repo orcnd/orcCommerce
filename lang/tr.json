@@ -24,6 +24,7 @@
     "Update": "Güncelle",
     "Deleted successfully": "Başarıyla silindi",    
     "Are you sure want to delete this ?" : "Bu silmek istediğinize emin misiniz ?",
-    
+    "Details": "Detaylar",
+    "List": "Liste",
     "Something went wrong please contact with an admin": "Bir şeyler ters gitti, lütfen bir yönetici ile iletişime geçin"
 }

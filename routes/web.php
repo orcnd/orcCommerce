@@ -31,5 +31,23 @@ Route::name('manage.')
                 name: 'category', 
                 controller: \App\Http\Controllers\Manage\CategoryController::class
             );
+            Route::resource(
+                name: 'product', 
+                controller: \App\Http\Controllers\Manage\ProductController::class
+            );
+
+            Route::prefix('tag')->name('tag.')
+                ->controller(\App\Http\Controllers\Manage\TagController::class)
+                ->group(
+                    function () {
+                        Route::get('search', 'search')->name('search');
+                        Route::post('store', 'store')->name('store');
+                    }
+                );
         }
     );
+
+
+
+Route::get("/searchTag/{slug}", [\App\Http\Controllers\Manage\GeneralController::class,'searchTag'])
+->name('searchTag');
