@@ -10,7 +10,8 @@ class ProductController extends CrudController1
         parent::__construct(
             _model: \App\Models\Product::class,
             _viewBase: 'manage.product.',
-            _routeBase: 'manage.product.'
+            _routeBase: 'manage.product.',
+            indexPageSize:2
         );
     }
     /**

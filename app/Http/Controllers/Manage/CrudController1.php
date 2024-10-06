@@ -7,49 +7,50 @@ use Illuminate\Http\Request;
 
 class CrudController1 extends Controller
 {
-    function __construct(public string $_model, public string $_viewBase,public string $_routeBase)
-    {
-    }
+    function __construct(
+        public string $_model, public string $_viewBase,
+        public string $_routeBase, public int $indexPageSize=20
+    ){}
     /**
-     * Gives validation array for create action 
-     * 
+     * Gives validation array for create action
+     *
      * @return array
      */
-    private function _getCreateValidateArray():array 
+    private function _getCreateValidateArray():array
     {
         return [];
     }
 
     /**
-     * Gives update validation array 
-     * 
-     * @param mixed $object object 
-     * 
+     * Gives update validation array
+     *
+     * @param mixed $object object
+     *
      * @return array
      */
-    private function _getUpdateValidateArray($object):array 
+    private function _getUpdateValidateArray($object):array
     {
         return [];
     }
 
     /**
      * Store hook runs after store
-     * 
-     * @param \Illuminate\Http\Request $r request 
-     * 
+     *
+     * @param \Illuminate\Http\Request $r request
+     *
      * @return void
      */
-    function storeHook(Request $request, mixed $item) 
+    function storeHook(Request $request, mixed $item)
     {
     }
 
-    
+
     /**
      * Update hook runs after update
-     * 
+     *
      * @param \Illuminate\Http\Request $request req
-     * @param int                      $id      id  
-     * 
+     * @param int                      $id      id
+     *
      * @return void
      */
     function updateHook(Request $request, int $id, mixed $item)
@@ -58,7 +59,7 @@ class CrudController1 extends Controller
 
     /**
      * Index
-     * 
+     *
      * @return mixed
      */
     function index()
@@ -66,18 +67,18 @@ class CrudController1 extends Controller
         return view(
             view: $this->_viewBase . 'index',
             data: [
-                'list' => $this->_model::orderBy('name')->get(),
+                'list' => $this->_model::orderBy('name')->paginate($this->indexPageSize),
                 '_routeBase' => $this->_routeBase
             ]
         );
     }
 
     /**
-     * Create 
-     * 
+     * Create
+     *
      * @return mixed
      */
-    function create() 
+    function create()
     {
         return view(
             $this->_viewBase . 'create',
@@ -90,9 +91,9 @@ class CrudController1 extends Controller
 
     /**
      * Store
-     * 
+     *
      * @param \Illuminate\Http\Request $request
-     * 
+     *
      * @return \Illuminate\Http\RedirectResponse|\Illuminate\Routing\Redirector
      */
     function store(Request $request)
@@ -108,48 +109,48 @@ class CrudController1 extends Controller
 
     /**
      * Shows the object
-     * 
+     *
      * @param int $id id
-     * 
+     *
      * @return \Illuminate\Contracts\View\Factory|\Illuminate\Contracts\View\View
      */
     function show(int $id)
     {
         $object=$this->_model::findOrFail($id);
         return view(
-            $this->_viewBase . 'show', 
+            $this->_viewBase . 'show',
             ['data' =>$object, '_routeBase'=> $this->_routeBase]
         );
     }
 
 
     /**
-     * Edit action 
-     * 
-     * @param int $id id 
-     * 
+     * Edit action
+     *
+     * @param int $id id
+     *
      * @return \Illuminate\Contracts\View\Factory|\Illuminate\Contracts\View\View
      */
-    function edit(int $id) 
+    function edit(int $id)
     {
         $object=$this->_model::findOrFail($id);
         return view(
             $this->_viewBase . 'edit',
             [
-                'data' =>$object, 
+                'data' =>$object,
                 '_routeBase'=> $this->_routeBase,
                 'topList' => $this->_model::all(),
             ]
         );
     }
 
-    
+
     /**
-     * Update action 
-     * 
+     * Update action
+     *
      * @param \Illuminate\Http\Request $request req
-     * @param int                      $id      id  
-     * 
+     * @param int                      $id      id
+     *
      * @return void
      */
     function update(Request $request, int $id)
@@ -162,15 +163,15 @@ class CrudController1 extends Controller
             route($this->_viewBase . 'show', [$object])
         );
     }
-    
+
     /**
-     * Destroy action 
+     * Destroy action
      *
      * @param int $id id
-     * 
+     *
      * @return \Illuminate\Http\RedirectResponse|\Illuminate\Routing\Redirector
      */
-    function destroy(int $id) 
+    function destroy(int $id)
     {
         $object=$this->_model::findOrFail($id);
         $object->delete();
