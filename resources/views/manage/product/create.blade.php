@@ -47,7 +47,7 @@
                     <span class="invalid-feedback" role="alert">
                         <strong>{{$message}}</strong>
                     </span>
-                    @enderror   
+                    @enderror
                 </div>
                 <div class="form-group mb-2">
                     <label for="category_id">{{ __('Category') }}</label>
@@ -56,13 +56,13 @@
                         @foreach ($categories as $object)
                             <option value="{{ $object->id }}">{{ $object->name }}</option>
                         @endforeach
-                    </select>   
+                    </select>
                     @error('category_id')
                     <span class="invalid-feedback" role="alert">
                         <strong>{{$message}}</strong>
                     </span>
                     @enderror
-                </div>  
+                </div>
 
                 <div class="form-group mb-2">
                     <label for="tags">{{ __('Tags') }}</label>
@@ -82,6 +82,12 @@
 
 
                 <script>
+                    $("#tagSearchInput").keypress(function(event) {
+                        if (event.which == 13) {
+                            addTag('tagSearchInput','tags');
+                            event.preventDefault();
+                        }
+                    });
                     const tagInput=UseBootstrapTag(document.getElementById('tags'));
                     var tagSearchInputTimer;
                       function addTag(searchInputId,tagInputId){

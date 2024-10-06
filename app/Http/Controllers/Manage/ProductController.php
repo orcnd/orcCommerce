@@ -14,44 +14,44 @@ class ProductController extends CrudController1
         );
     }
     /**
-     * Gives validation array for create action 
-     * 
+     * Gives validation array for create action
+     *
      * @return array
      */
-    private function _getCreateValidateArray():array 
+    private function _getCreateValidateArray():array
     {
         return [
             'name' => 'required|string|max:255',
             'sku' => 'required|string|max:255|unique:products,sku',
             'price' => 'required|numeric',
-            'description' => 'required|string|max:255', 
+            'description' => 'required|string|max:255',
             'category_id' => 'nullable|numeric',
         ];
     }
 
     /**
-     * Gives update validation array 
-     * 
-     * @param mixed $object object 
-     * 
+     * Gives update validation array
+     *
+     * @param mixed $object object
+     *
      * @return array
      */
-    private function _getUpdateValidateArray($object):array 
+    private function _getUpdateValidateArray($object):array
     {
-        return [   
+        return [
             'name' => 'required|string|max:255',
             'slug' => 'required|string|max:255|unique:products,sku,' . $object->sku,
-            'description' => 'required|string|max:255', 
+            'description' => 'required|string|max:255',
             'parent_id' => 'nullable|numeric',
         ];
     }
 
     /**
-     * Create 
-     * 
+     * Create
+     *
      * @return mixed
      */
-    function create() 
+    function create()
     {
         return view(
             $this->_viewBase . 'create',
@@ -64,20 +64,21 @@ class ProductController extends CrudController1
     }
 
     /**
-     * Edit action 
-     * 
-     * @param int $id id 
-     * 
+     * Edit action
+     *
+     * @param int $id id
+     *
      * @return \Illuminate\Contracts\View\Factory|\Illuminate\Contracts\View\View
      */
-    function edit(int $id) 
+    function edit(int $id)
     {
         $object=$this->_model::findOrFail($id);
         return view(
             $this->_viewBase . 'edit',
             [
-                'data' =>$object, 
+                'data' =>$object,
                 'categories' => \App\Models\Category::all(),
+                'tags' => $object->tags()->pluck('name')->toArray(),
                 '_routeBase'=> $this->_routeBase,
                 'topList' => $this->_model::all(),
             ]
@@ -92,4 +93,15 @@ class ProductController extends CrudController1
         $fTags=Tag::whereIn(column: 'name', values: $tags)->get();
         $item->tags()->attach($fTags);
     }
+
+
+    function updateHook(Request $request, int $id, mixed $item)
+    {
+        $item->tags()->detach();
+        $tags=$request->tags;
+        $tags=(strpos($tags, ',') !== false)?explode(',', $tags):[$tags];
+        $fTags=Tag::whereIn(column: 'name', values: $tags)->get();
+        $item->tags()->attach($fTags);
+    }
+
 }

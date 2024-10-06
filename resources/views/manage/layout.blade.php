@@ -18,8 +18,9 @@
             <div class="col-auto col-md-3 col-xl-2 px-sm-2 px-0">
                 <div class="d-flex flex-column align-items-center align-items-sm-start px-3 pt-2 min-vh-100">
                     <ul class="nav nav-pills flex-column mb-auto">
-                        <li class="nav-item"><a href="{{route('manage.home')}}" class="nav-link px-2 link-secondary">{{__('Home')}}</a></li>                   
-                        <li class="nav-item"><a href="{{route('manage.category.index')}}" class="nav-link px-2 link-secondary">{{__('Categories')}}</a></li>                   
+                        <li class="nav-item"><a href="{{route('manage.home')}}" class="nav-link px-2 link-secondary">{{__('Home')}}</a></li>
+                        <li class="nav-item"><a href="{{route('manage.category.index')}}" class="nav-link px-2 link-secondary">{{__('Categories')}}</a></li>
+                        <li class="nav-item"><a href="{{route('manage.product.index')}}" class="nav-link px-2 link-secondary">{{__('Products')}}</a></li>
                     </ul>
 
                     @include('shared.mainNavbarLanguageMenu')
