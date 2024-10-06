@@ -22,11 +22,11 @@
     <div class="col-md-6">
         <div class="card">
             <div class="card-body">
-                <h5 class="card-title">{{__('Slug')}}</h5>
-                <p class="card-text">{{$data->slug}}</p>
+                <h5 class="card-title">{{__('SKU')}}</h5>
+                <p class="card-text">{{$data->sku}}</p>
             </div>
         </div>
-    </div>  
+    </div>
     <div class="col-md-6">
         <div class="card">
             <div class="card-body">
@@ -38,8 +38,16 @@
     <div class="col-md-6">
         <div class="card">
             <div class="card-body">
-                <h5 class="card-title">{{__('Parent')}}</h5>
-                <p class="card-text">{{$data->parent_id}}</p>
+                <h5 class="card-title">{{__('Category')}}</h5>
+                <p class="card-text">{{$data->category->name}}</p>
+            </div>
+        </div>
+    </div>
+    <div class="col-md-6">
+        <div class="card">
+            <div class="card-body">
+                <h5 class="card-title">{{__('Tags')}}</h5>
+                <p class="card-text">{{$data->tags->pluck("name")->implode(', ')}}</p>
             </div>
         </div>
     </div>
@@ -48,5 +56,4 @@
 
 </script>
 
-@endsection 
-
+@endsection
