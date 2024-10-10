@@ -30,4 +30,14 @@ class Product extends Model
     {
         return  $this->hasOne(\App\Models\Category::class, 'id', 'category_id');
     }
+
+    /**
+     * Gives image directory name
+     *
+     * @return string
+     */
+    public function getImageDirName() :string
+    {
+        return substr(md5($this->id.'image-salt'), 0,  6);
+    }
 }
