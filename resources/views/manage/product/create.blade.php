@@ -9,7 +9,7 @@
     <h1>{{ __('Create') }}</h1>
     <div class="row">
         <div class="col-12 col-xl-4">
-            <form action="{{ route($_routeBase . 'store') }}" method="POST">
+            <form action="{{ route($_routeBase . 'store') }}" enctype="multipart/form-data" method="POST">
                 @csrf
                 <div class="form-group mb-2">
                     <label for="name">{{ __('Name') }}</label>
@@ -133,6 +133,17 @@
                           }, 300);
                       });
                 </script>
+
+                <div class="form-group mb-2">
+                    <label for="images">{{ __('Images') }}</label>
+                    <input class="form-control" type="file" id="images" name="images[]" accept=".jpg,.jpeg,.png"  multiple>
+                    @error('images')
+                    <span class="invalid-feedback" role="alert">
+                        <strong>{{$message}}</strong>
+                    </span>
+                    @enderror
+                </div>
+
                 <button type="submit" class="btn btn-primary w-100">{{ __('Create') }}</button>
             </form>
         </div>

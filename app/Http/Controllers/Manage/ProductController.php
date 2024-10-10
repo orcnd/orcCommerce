@@ -3,6 +3,8 @@ namespace App\Http\Controllers\Manage;
 
 use Illuminate\Http\Request;
 use App\Models\Tag;
+use File;
+use Intervention\Image\ImageManager;
 class ProductController extends CrudController1
 {
     function __construct()
@@ -11,7 +13,7 @@ class ProductController extends CrudController1
             _model: \App\Models\Product::class,
             _viewBase: 'manage.product.',
             _routeBase: 'manage.product.',
-            indexPageSize:2
+            indexPageSize:10
         );
     }
     /**
@@ -27,6 +29,7 @@ class ProductController extends CrudController1
             'price' => 'required|numeric',
             'description' => 'required|string|max:255',
             'category_id' => 'nullable|numeric',
+            'images.*' => 'mimes:jpg,jpeg,png|max:10000',
         ];
     }
 
@@ -93,6 +96,20 @@ class ProductController extends CrudController1
         $tags=(strpos($tags, ',') !== false)?explode(',', $tags):[$tags];
         $fTags=Tag::whereIn(column: 'name', values: $tags)->get();
         $item->tags()->attach($fTags);
+
+        $im=new ImageManager(
+            new \Intervention\Image\Drivers\Gd\Driver()
+        );
+
+        $imageDirName=$item->getImageDirName();
+
+        File::makeDirectory('product-images/' . $imageDirName);
+        foreach ($request->images as $k=>$image) {
+            $t=$im->read($image);
+            $enc=$t->toWebp();
+            $enc->save(public_path('product-images/' . $imageDirName . '/' . $k . '.webp') );
+        }
+
     }
 
 
