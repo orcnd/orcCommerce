@@ -3,6 +3,7 @@
 /public/build
 /public/hot
 /public/storage
+
 /storage/*.key
 /vendor
 .env
@@ -20,3 +21,4 @@ yarn-error.log
 /.vscode
 .editorconfig
 .php-cs-fixer.cache
+/public/product-images/*/
