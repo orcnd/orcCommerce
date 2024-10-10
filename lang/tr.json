@@ -28,5 +28,10 @@
     "List": "Liste",
     "Product" :  "Ürün",
     "Products" : "Ürünler",
+    "Price" : "Fiyat",
+    "SKU" : "SKU",
+    "Category" : "Kategori",
+    "Tags" : "Etiketler",
+    "Images" : "Resimler",
     "Something went wrong please contact with an admin": "Bir şeyler ters gitti, lütfen bir yönetici ile iletişime geçin"
 }
