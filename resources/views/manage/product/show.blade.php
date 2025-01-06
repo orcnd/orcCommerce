@@ -39,7 +39,7 @@
         <div class="card">
             <div class="card-body">
                 <h5 class="card-title">{{__('Category')}}</h5>
-                <p class="card-text">{{$data->category->name}}</p>
+                <p class="card-text">{{$data->category?->name}}</p>
             </div>
         </div>
     </div>

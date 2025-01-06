@@ -3,5 +3,13 @@
 @section('title', __('Home'))
 
 @section('content')
-<h1>{{__('Home')}}</h1>
-@endsection 
+
+    <div class="container">
+        <div id="main-slider">
+            <a href="#" style="background-image:url({{asset('images/slider/magaza.webp')}});">
+
+            </a>
+        </div>
+    </div>
+
+@endsection

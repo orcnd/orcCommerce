@@ -75,7 +75,6 @@
                     @enderror
                 </div>
 
-
                 <script>
                     $("#tagSearchInput").keypress(function(event) {
                         if (event.which == 13) {
@@ -128,6 +127,20 @@
                           }, 300);
                       });
                 </script>
+
+
+                <div class="form-group mb-2">
+                    <label for="images">{{ __('Images') }}</label>
+                    {{for($i=0;$i<count($data->images);$i++)}}
+                    <img src="{{$data->images[$i]->path}}" class="img-thumbnail" style="max-width: 100px;max-height: 100px;">
+                    {{endfor}}
+                    <input class="form-control" type="file" id="images" name="images[]" accept=".jpg,.jpeg,.png"  multiple>
+                    @error('images')
+                    <span class="invalid-feedback" role="alert">
+                        <strong>{{$message}}</strong>
+                    </span>
+                    @enderror
+                </div>
 
                 <button type="submit" class="btn btn-primary w-100">{{ __('Update') }}</button>
 

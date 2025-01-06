@@ -16,6 +16,8 @@ class Product extends Model
         'sku', 'price', 'category_id'
     ];
 
+
+
     /**
      * Tags
      *
@@ -39,5 +41,14 @@ class Product extends Model
     public function getImageDirName() :string
     {
         return substr(md5($this->id.'image-salt'), 0,  6);
+    }
+
+    public static function getImagePath():string {
+        return $enc->save(filepath: public_path('product-images/' . $imageDirName));
+
+    }
+
+    public function getImagesAttribute ():array{
+        $this->
     }
 }

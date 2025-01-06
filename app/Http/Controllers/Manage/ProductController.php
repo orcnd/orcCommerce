@@ -92,34 +92,52 @@ class ProductController extends CrudController1
 
     function storeHook(Request $request, mixed $item)
     {
+
+        // add tags
         $tags=$request->tags;
         $tags=(strpos($tags, ',') !== false)?explode(',', $tags):[$tags];
         $fTags=Tag::whereIn(column: 'name', values: $tags)->get();
         $item->tags()->attach($fTags);
 
+        // create image directory
+        $imageDirName=$item->getImageDirName();
+        File::makeDirectory('product-images/' . $imageDirName);
+
+
+        //convert images into webp and save
         $im=new ImageManager(
             new \Intervention\Image\Drivers\Gd\Driver()
         );
 
-        $imageDirName=$item->getImageDirName();
-
-        File::makeDirectory('product-images/' . $imageDirName);
         foreach ($request->images as $k=>$image) {
             $t=$im->read($image);
             $enc=$t->toWebp();
             $enc->save(public_path('product-images/' . $imageDirName . '/' . $k . '.webp') );
         }
-
     }
 
 
     function updateHook(Request $request, int $id, mixed $item)
     {
+        // update tags
         $item->tags()->detach();
         $tags=$request->tags;
         $tags=(strpos($tags, ',') !== false)?explode(',', $tags):[$tags];
         $fTags=Tag::whereIn(column: 'name', values: $tags)->get();
         $item->tags()->attach($fTags);
+
+        $imageDirName=$item->getImageDirName();
+
+        //convert images into webp
+        $im=new ImageManager(
+            new \Intervention\Image\Drivers\Gd\Driver()
+        );
+
+        foreach ($request->images as $k=>$image) {
+            $t=$im->read($image);
+            $enc=$t->toWebp();
+            $enc->save(filepath: public_path('product-images/' . $imageDirName . '/' . $k . '.webp') );
+        }
     }
 
 }
